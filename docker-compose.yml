@@ -10,7 +10,9 @@ services:
     environment: 
       - LOG_LEVEL=DEBUG
       - TCPDUMP_INTERFACE=eth0
-    # command: sleep 99999
+      - BAN_DENIED_TRIALS=true
+      - BAN_BY_COUNTRY=true
+      - ALLOWED_COUNTRIES=BR PT
 
   freepbx:
     image: flaviostutz/freepbx
