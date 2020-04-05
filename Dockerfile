@@ -17,6 +17,7 @@ ENV FAIL_COUNT_IN_WINDOW '10'
 ENV TCPDUMP_INTERFACE ''
 ENV TCPDUMP_PORT '5060'
 
+#SQLITE DB
 VOLUME [ "/var/lib/fail2ban/" ]
 
 CMD [ "/startup.sh" ]
