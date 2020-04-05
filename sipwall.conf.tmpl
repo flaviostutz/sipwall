@@ -5,5 +5,4 @@ logpath	 = /var/log/sipwall
 bantime = $BAN_TIME_SECONDS
 findtime = $FAIL_TIME_WINDOW_SECONDS
 maxretry = $FAIL_COUNT_IN_WINDOW
-action = iptables-ipset-proto4[name=sipwall, port="0:65535", chain=DOCKER-USER, protocol=udp]
-         iptables-ipset-proto4[name=sipwall, port="0:65535", chain=DOCKER-USER, protocol=tcp]
+action = iptables-ipset-proto4[name=sipwall, port="0:65535", chain=DOCKER-USER, protocol=all]
