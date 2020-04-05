@@ -1,7 +1,9 @@
 # sipwall
-Analyses SIP network traffic and blocks hosts that are suspicious in iptables.
+Analyses SIP network traffic and blocks hosts that are suspicious using ipset and iptables.
 
-Uses tcpdump for searching for hosts that are trying things that are denied by SIP gateway and if they retry a lot, place the requesting IP to a blacklist using fail2ban+iptables for a period of time.
+Uses tcpdump for searching for hosts that are trying things that are being denied by SIP gateway and if they retry a lot, place the requesting IP to a blacklist using fail2ban+iptables for a period of time. This is useful to block brute force attacks.
+
+It is possible to deny access from packets coming from unauthorized countries too. See BAN_BY_COUNTRY and ALLOWED_COUNTRIES ENVs.
 
 ## Usage
 
@@ -20,6 +22,14 @@ Uses tcpdump for searching for hosts that are trying things that are denied by S
 * Run ```docker-compose up -d```
 
 * Check logs at ```docker-compose logs -f```
+
+* Run ```iptables -L -n -v``` to check for new rules
+
+* Run ```ipset list``` to check for blocked ips
+
+* Run ```docker-compose exec sipwall fail2ban-client status sipwall-denied`` to check for fail2ban status
+
+* Run ```docker-compose exec sipwall fail2ban-client status sipwall-country`` to check for fail2ban status
 
 ## ENVs
 
