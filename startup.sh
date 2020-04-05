@@ -53,10 +53,10 @@ while true; do
     rm -f $SIPWALL_FILE
   fi
 
-  # A=$(fail2ban-client status sip-refused)
+  # A=$(fail2ban-client status sipwall)
   # FAIL2BAN_STATUS=$?
   # if [ $FAIL2BAN_STATUS -ne 0 ]; then
-  #   echo "fail2ban sip-refused is not running"
+  #   echo "fail2ban sipwall is not running"
   #   exit 1
   # fi
 

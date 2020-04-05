@@ -6,8 +6,12 @@ RUN apk add --no-cache iptables fail2ban tcpdump ipset gettext && \
 
 RUN mkfifo /var/log/fail2ban.log
 
+RUN rm -rf /etc/fail2ban/filter.d/* && \
+    rm -rf /etc/fail2ban/action.d/*
+
 ADD sipwall.conf.tmpl /
-ADD sip-refused.conf /etc/fail2ban/filter.d/
+ADD sipwall-filter.conf /etc/fail2ban/filter.d/
+ADD sipwall-action.conf /etc/fail2ban/action.d/
 ADD startup.sh /
 
 ENV LOG_LEVEL 'INFO'

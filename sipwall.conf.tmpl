@@ -1,8 +1,9 @@
-[sip-refused]
+[sipwall]
 enabled  = true
-filter   = sip-refused
+filter   = sipwall-filter
 logpath	 = /var/log/sipwall
 bantime = $BAN_TIME_SECONDS
 findtime = $FAIL_TIME_WINDOW_SECONDS
 maxretry = $FAIL_COUNT_IN_WINDOW
-action = iptables-ipset-proto4[name=sipwall, port="0:65535", chain=DOCKER-USER, protocol=all]
+action = sipwall-action[name=sipwall]
+
