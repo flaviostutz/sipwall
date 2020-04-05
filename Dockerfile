@@ -9,9 +9,15 @@ RUN mkfifo /var/log/fail2ban.log
 RUN rm -rf /etc/fail2ban/filter.d/* && \
     rm -rf /etc/fail2ban/action.d/*
 
-ADD sipwall.conf.tmpl /
-ADD sipwall-filter.conf /etc/fail2ban/filter.d/
-ADD sipwall-action.conf /etc/fail2ban/action.d/
+ADD sipwall-denied.conf.tmpl /
+ADD sipwall-denied-filter.conf /etc/fail2ban/filter.d/
+ADD sipwall-ipset-action.conf /etc/fail2ban/action.d/
+
+ADD sipwall-country.conf.tmpl /
+ADD sipwall-all-filter.conf /etc/fail2ban/filter.d/
+ADD sipwall-country-action.conf /etc/fail2ban/action.d/
+ADD not-country.sh /
+
 ADD startup.sh /
 
 ENV LOG_LEVEL 'INFO'
@@ -20,6 +26,9 @@ ENV FAIL_TIME_WINDOW_SECONDS '600'
 ENV FAIL_COUNT_IN_WINDOW '10'
 ENV TCPDUMP_INTERFACE ''
 ENV TCPDUMP_PORT '5060'
+ENV BAN_DENIED_TRIALS 'true'
+ENV BAN_BY_COUNTRY 'false'
+ENV ALLOWED_COUNTRIES 'BR'
 
 #SQLITE DB
 VOLUME [ "/var/lib/fail2ban/" ]

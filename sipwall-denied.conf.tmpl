@@ -1,0 +1,10 @@
+[sipwall-denied]
+enabled  = true
+filter   = sipwall-denied-filter
+logpath	 = /var/log/sipwall-out
+bantime = $BAN_TIME_SECONDS
+findtime = $FAIL_TIME_WINDOW_SECONDS
+maxretry = $FAIL_COUNT_IN_WINDOW
+action = sipwall-ipset-action[name=sipwall-denied]
+
+

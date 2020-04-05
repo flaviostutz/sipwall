@@ -15,7 +15,14 @@ if [ ! -f /init ]; then
   echo "Preparing config files according to ENVs..."
   # sed -i 's|logtarget = /var/log/fail2ban.log|logtarget = STDOUT|g' /etc/fail2ban/fail2ban.conf
   sed -i "s|loglevel = INFO|loglevel = $LOG_LEVEL|g" /etc/fail2ban/fail2ban.conf
-  envsubst < /sipwall.conf.tmpl > /etc/fail2ban/jail.d/sipwall.conf
+
+  if [ "$BAN_DENIED_TRIALS" == "true" ]; then
+    envsubst < /sipwall-denied.conf.tmpl > /etc/fail2ban/jail.d/sipwall-denied.conf
+  fi
+
+  if [ "$BAN_BY_COUNTRY" == "true" ]; then
+    envsubst < /sipwall-country.conf.tmpl > /etc/fail2ban/jail.d/sipwall-country.conf
+  fi
 
   touch /init
 fi
@@ -30,27 +37,37 @@ fail2ban-server -x $VERBOSE &
 
 echo "Starting tcpdump routine..."
 
-SIPWALL_FILE="/var/log/sipwall"
-rm $SIPWALL_FILE
+SIPWALL_IN_FILE="/var/log/sipwall-in"
+rm $SIPWALL_IN_FILE
+
+SIPWALL_OUT_FILE="/var/log/sipwall-out"
+rm $SIPWALL_OUT_FILE
 
 while true; do
 
-  if [ ! -f $SIPWALL_FILE ]; then
+  if [ ! -f $SIPWALL_IN_FILE ]; then
     echo "Killing any existing tcpdump and grep processes..."
     pkill tcpdump
     pkill grep
-    echo "Launching tcpdump for sending sip rejects info to $SIPWALL_FILE..."
-    touch $SIPWALL_FILE
-    tcpdump -n -i $TCPDUMP_INTERFACE port $TCPDUMP_PORT | grep -E "SIP:.*\s[45][0-9][0-9]\s" > $SIPWALL_FILE &
+
+    echo "Launching tcpdump for sending sip OUT to $SIPWALL_OUT_FILE..."
+    touch $SIPWALL_OUT_FILE
+    tcpdump -n -i $TCPDUMP_INTERFACE src port $TCPDUMP_PORT > $SIPWALL_OUT_FILE &
+
+    echo "Launching tcpdump for sending sip IN to $SIPWALL_IN_FILE..."
+    touch $SIPWALL_IN_FILE
+    tcpdump -n -i $TCPDUMP_INTERFACE dst port $TCPDUMP_PORT > $SIPWALL_IN_FILE &    
   fi
 
   sleep 60
 
   #evaluate if log is too large and delete it if needed
-  FILESIZE=$(stat -c %s $SIPWALL_FILE)
-  if [ $FILESIZE -gt 1000000 ]; then
-    echo "File $SIPWALL_FILE is too large. Deleting it and reinitializing tcpdump..."
-    rm -f $SIPWALL_FILE
+  FILESIZE_IN=$(stat -c %s $SIPWALL_IN_FILE)
+  FILESIZE_OUT=$(stat -c %s $SIPWALL_OUT_FILE)
+  if [ $FILESIZE_IN -gt 1000000 ] || [ $FILESIZE_OUT -gt 1000000 ]; then
+    echo "Dump files too large. Deleting it and reinitializing tcpdump..."
+    rm -f $SIPWALL_IN_FILE
+    rm -f $SIPWALL_OUT_FILE
   fi
 
   # A=$(fail2ban-client status sipwall)
