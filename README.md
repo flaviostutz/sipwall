@@ -24,12 +24,14 @@ Uses tcpdump for searching for hosts that are trying things that are denied by S
 ## ENVs
 
 * **LOG_LEVEL** - one of CRITICAL, ERROR, WARNING, NOTICE, INFO, DEBUG. defaults to INFO
-
 * **BAN_TIME_SECONDS** - time for a host to be banned after identifying it as a threat. defaults to '300'
 * **FAIL_TIME_WINDOW_SECONDS** - time window for counting failures in SIP responses sent to a particular host. defaults to '600'
 * **FAIL_COUNT_IN_WINDOW** - number of failures sent to the host within the time window in order to mark this host as a threat. defaults to '10'
 * **TCPDUMP_INTERFACE** - tcpdump network interface to listen to. required
 * **TCPDUMP_PORT** - tcpdump incoming packet port to listen to. defaults to '5060'
+* **BAN_DENIED_TRIALS** - enable ban of IPs that receives negations from SIP. It may be an IP that is trying lots of user/password combinations. defaults to 'true'
+* **BAN_BY_COUNTRY** - check if IP from the packet source is from a list of authorized countries. Ban IP if not. defaults to 'false'
+* **ALLOWED_COUNTRIES** - list of allowed IP countries separated by ' ' (space). defaults to 'BR'
 
 ### Example
 
