@@ -6,6 +6,7 @@ services:
     build: .
     image: flaviostutz/sipwall
     network_mode: host
+    privileged: true
     environment: 
       - LOG_LEVEL=DEBUG
       - TCPDUMP_INTERFACE=eth0

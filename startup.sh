@@ -20,7 +20,7 @@ echo "Starting fail2ban with sip rejects filter activated..."
 fail2ban-server &
 
 echo "Starting tcpdump for sending sip rejects to /var/log/sipwall..."
-tcpdump -n | grep -E "SIP:.*\s[45][0-9][0-9]\s" > /var/log/sipwall&
+tcpdump -n -i $TCPDUMP_INTERFACE port $TCPDUMP_PORT | grep -E "SIP:.*\s[45][0-9][0-9]\s" > /var/log/sipwall&
 
 #Check if all processes are OK
 while /bin/true; do
