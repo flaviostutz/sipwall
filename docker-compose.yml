@@ -6,6 +6,9 @@ services:
     build: .
     image: flaviostutz/sipwall
     network_mode: host
+    environment: 
+      - LOG_LEVEL=DEBUG
+      - TCPDUMP_INTERFACE=eth0
     # command: sleep 99999
 
   freepbx:

@@ -1,0 +1,11 @@
+[sip-refused]
+enabled  = true
+filter   = sip-refused
+# port     = 5060
+logpath	 = /var/log/sipwall
+action = 
+bantime = $BAN_TIME_SECONDS
+findtime = $FAIL_TIME_WINDOW_SECONDS
+maxretry = $FAIL_COUNT_IN_WINDOW
+banaction = iptables-ipset-proto4
+# banaction = iptables-multiport
