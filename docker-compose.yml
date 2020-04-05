@@ -1,0 +1,24 @@
+version: '3.3'
+
+services:
+
+  sipwall:
+    build: .
+    image: flaviostutz/sipwall
+    network_mode: host
+    # command: sleep 99999
+
+  freepbx:
+    image: flaviostutz/freepbx
+    ports:
+      - 8080:80
+      - 5060:5060/udp
+      - 5160:5160/udp
+      - 3306:3306
+      - 18000-18100:18000-18100/udp
+    restart: always
+    environment:
+      - MARIADB_REMOTE_ROOT_PASSWORD=admin123
+      - ADMIN_PASSWORD=admin123
+      - DISABLE_SIGNATURE_CHECK=true
+  
