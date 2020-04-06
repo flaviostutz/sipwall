@@ -10,12 +10,12 @@ services:
     environment: 
       - LOG_LEVEL=DEBUG
       - TCPDUMP_INTERFACE=eth0
-      - BAN_DENIED_TRIALS=true
+      - BAN_DENIED_TRIALS=false
       - BAN_BY_COUNTRY=true
-      - ALLOWED_COUNTRIES=BR US
-      - BAN_TIME_SECONDS=10
-      - FAIL_TIME_WINDOW_SECONDS=60
-      - FAIL_COUNT_IN_WINDOW=2
+      - ALLOWED_COUNTRIES=BR
+      - BAN_TIME_SECONDS=600
+      - FAIL_TIME_WINDOW_SECONDS=300
+      - FAIL_COUNT_IN_WINDOW=5
 
   freepbx:
     image: flaviostutz/freepbx
