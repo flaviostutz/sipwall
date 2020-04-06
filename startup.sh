@@ -40,9 +40,6 @@ echo "Starting tcpdump routine..."
 SIPWALL_INOUT_FILE="/var/log/sipwall-inout"
 rm $SIPWALL_INOUT_FILE
 
-# SIPWALL_OUT_FILE="/var/log/sipwall-out"
-# rm $SIPWALL_OUT_FILE
-
 while true; do
 
   if [ ! -f $SIPWALL_INOUT_FILE ]; then
@@ -53,30 +50,16 @@ while true; do
     echo "Launching tcpdump for sending sip INOUT to $SIPWALL_INOUT_FILE..."
     touch $SIPWALL_INOUT_FILE
     tcpdump -n -i $TCPDUMP_INTERFACE port $TCPDUMP_PORT > $SIPWALL_INOUT_FILE &
-
-    # echo "Launching tcpdump for sending sip IN to $SIPWALL_IN_FILE..."
-    # touch $SIPWALL_IN_FILE
-    # tcpdump -n -i $TCPDUMP_INTERFACE dst port $TCPDUMP_PORT > $SIPWALL_IN_FILE &    
   fi
 
   sleep 60
 
   #evaluate if log is too large and delete it if needed
   FILESIZE_INOUT=$(stat -c %s $SIPWALL_INOUT_FILE)
-  # FILESIZE_OUT=$(stat -c %s $SIPWALL_OUT_FILE)
-  # if [ $FILESIZE_IN -gt 1000000 ] || [ $FILESIZE_OUT -gt 1000000 ]; then
   if [ $FILESIZE_INOUT -gt 10000000 ]; then
     echo "Dump files too large. Deleting it and reinitializing tcpdump..."
     rm -f $SIPWALL_INOUT_FILE
-    # rm -f $SIPWALL_OUT_FILE
   fi
-
-  # A=$(fail2ban-client status sipwall)
-  # FAIL2BAN_STATUS=$?
-  # if [ $FAIL2BAN_STATUS -ne 0 ]; then
-  #   echo "fail2ban sipwall is not running"
-  #   exit 1
-  # fi
 
 done
 
