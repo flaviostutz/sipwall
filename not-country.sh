@@ -1,6 +1,10 @@
 #!/bin/sh
 
-COUNTRY=$(whois $1 | grep -m1 -i Country | perl -n -e'/Country:.*(..)/ && print $1')
+COUNTRY=$(whois $1 | grep -m1 Country | perl -n -e'/Country:.*(..)/ && print $1')
+#try lower case
+if [ "$COUNTRY" == "" ]; then
+  COUNTRY=$(whois $1 | grep -m1 country | perl -n -e'/country:.*(..)/ && print $1')
+fi
 echo "IP $1 is from $COUNTRY"
 
 for ALLOWED_COUNTRY in $ALLOWED_COUNTRIES
