@@ -50,6 +50,7 @@ It is possible to deny access from packets coming from unauthorized countries to
 * **BAN_DENIED_TRIALS** - enable ban of IPs that receives negations from SIP. It may be an IP that is trying lots of user/password combinations. defaults to 'true'
 * **BAN_BY_COUNTRY** - check if IP from the packet source is from a list of authorized countries. Ban IP if not. defaults to 'false'
 * **ALLOWED_COUNTRIES** - list of allowed IP countries separated by ' ' (space). defaults to 'BR'
+* **WHITELISTED_IPS** - list of IPs/masks that won't be banned in any case. ex.: 201.34.32.75 89.32.0.0/16. The server public IP got with "curl ifconfig.me" will be used in whitelist too.
 
 ### Example
 

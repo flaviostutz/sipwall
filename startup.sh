@@ -28,6 +28,11 @@ if [ ! -f /init ]; then
 fi
 
 
+#Configure whitelist according to aparent public IP and whitelist
+export PUBLIC_IP=$(curl -s ifconfig.me)
+envsubst < /sipwall-whitelist.conf.tmpl > /etc/fail2ban/jail.d/sipwall-whitelist.conf
+
+
 echo "Starting fail2ban with sip rejects filter activated..."
 if [ "$LOG_LEVEL" == "DEBUG" ]; then
   VERBOSE="-vv"
