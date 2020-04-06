@@ -41,7 +41,7 @@ It is possible to deny access from packets coming from unauthorized countries to
 
 ## ENVs
 
-* **LOG_LEVEL** - one of CRITICAL, ERROR, WARNING, NOTICE, INFO, DEBUG. defaults to INFO
+* **LOG_LEVEL** - one of CRITICAL, ERROR, WARNING, NOTICE, INFO, DEBUG. defaults to WARNING
 * **BAN_TIME_SECONDS** - time for a host to be banned after identifying it as a threat. defaults to '300'
 * **FAIL_TIME_WINDOW_SECONDS** - time window for counting failures in SIP responses sent to a particular host. defaults to '600'
 * **FAIL_COUNT_IN_WINDOW** - number of failures sent to the host within the time window in order to mark this host as a threat. defaults to '10'
