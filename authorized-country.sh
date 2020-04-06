@@ -11,7 +11,7 @@ fi
 
 for COUNTRY in $COUNTRIES
 do
-  echo "IP $IP is from $COUNTRY"
+  # echo "IP $IP is from $COUNTRY"
 
   for ALLOWED_COUNTRY in $ALLOWED_COUNTRIES
   do
