@@ -13,8 +13,10 @@ ADD sipwall-denied.conf.tmpl /
 ADD sipwall-denied-filter.conf /etc/fail2ban/filter.d/
 ADD sipwall-ipset-action.conf /etc/fail2ban/action.d/
 
-ADD sipwall-country.conf.tmpl /
-ADD sipwall-all-filter.conf /etc/fail2ban/filter.d/
+ADD sipwall-country-dst.conf.tmpl /
+ADD sipwall-country-src.conf.tmpl /
+ADD sipwall-src-filter.conf /etc/fail2ban/filter.d/
+ADD sipwall-dst-filter.conf /etc/fail2ban/filter.d/
 ADD sipwall-country-action.conf /etc/fail2ban/action.d/
 ADD authorized-country.sh /
 ADD add-ipset-not-country.sh /

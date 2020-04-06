@@ -21,7 +21,8 @@ if [ ! -f /init ]; then
   fi
 
   if [ "$BAN_BY_COUNTRY" == "true" ]; then
-    envsubst < /sipwall-country.conf.tmpl > /etc/fail2ban/jail.d/sipwall-country.conf
+    envsubst < /sipwall-country-dst.conf.tmpl > /etc/fail2ban/jail.d/sipwall-country-dst.conf
+    envsubst < /sipwall-country-src.conf.tmpl > /etc/fail2ban/jail.d/sipwall-country-src.conf
   fi
 
   touch /init

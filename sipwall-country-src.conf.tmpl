@@ -1,0 +1,8 @@
+[sipwall-country-src]
+enabled  = true
+filter   = sipwall-src-filter
+logpath	 = /var/log/sipwall-inout
+bantime = $BAN_TIME_SECONDS
+findtime = 60
+maxretry = 0
+action = sipwall-country-action[name=sipwall-country]
