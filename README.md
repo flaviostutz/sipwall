@@ -15,8 +15,14 @@ It is possible to deny access from packets coming from unauthorized countries to
     network_mode: host
     privileged: true
     environment:
-      - LOG_LEVEL=INFO
+      - LOG_LEVEL=DEBUG
       - TCPDUMP_INTERFACE=eth0
+      - BAN_DENIED_TRIALS=true
+      - BAN_BY_COUNTRY=true
+      - ALLOWED_COUNTRIES=BR
+      - BAN_TIME_SECONDS=30
+      - FAIL_TIME_WINDOW_SECONDS=60
+      - FAIL_COUNT_IN_WINDOW=5
 ```
 
 * Run ```docker-compose up -d```
