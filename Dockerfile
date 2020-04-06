@@ -1,6 +1,6 @@
 FROM alpine:3.11.5
 
-RUN apk add --no-cache iptables fail2ban tcpdump ipset gettext perl whois && \
+RUN apk add --no-cache iptables fail2ban tcpdump ipset gettext perl whois curl && \
     rm /etc/fail2ban/jail.d/alpine-ssh.conf && \
     mkfifo /var/log/sipwall
 
