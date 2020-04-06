@@ -8,10 +8,10 @@ for ALLOWED_COUNTRY in $ALLOWED_COUNTRIES
 do
   if [ "$COUNTRY" == "$ALLOWED_COUNTRY" ]; then
     echo "IP $1 ALLOWED - COUNTRY $COUNTRY"
-    exit 1
+    exit 0
   fi
 done
 
 echo "IP $1 NOT ALLOWED - COUNTRY $COUNTRY"
-exit 0
+exit 1
 

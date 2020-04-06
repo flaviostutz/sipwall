@@ -15,7 +15,8 @@ ADD sipwall-ipset-action.conf /etc/fail2ban/action.d/
 ADD sipwall-country.conf.tmpl /
 ADD sipwall-all-filter.conf /etc/fail2ban/filter.d/
 ADD sipwall-country-action.conf /etc/fail2ban/action.d/
-ADD not-country.sh /
+ADD authorized-country.sh /
+ADD add-ipset-not-country.sh /
 
 ADD startup.sh /
 
