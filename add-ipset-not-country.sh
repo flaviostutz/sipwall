@@ -9,9 +9,9 @@ IPSETNAME=$2
 AUTHORIZED=$?
 
 if [ "$AUTHORIZED" == "1" ]; then
-  echo "Adding $IP to blacklist (country)"
+#   echo "Adding $IP to blacklist (country)"
   ipset --add $IPSETNAME $IP
-else
-  echo "IP $IP is from an authorized country. Won't blacklist it. (country)"
+# else
+#   echo "IP $IP is from an authorized country. Won't blacklist it. (country)"
 fi
 
