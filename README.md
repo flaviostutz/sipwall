@@ -31,6 +31,8 @@ It is possible to deny access from packets coming from unauthorized countries to
 
 * Run ```docker-compose exec sipwall fail2ban-client status sipwall-country`` to check for fail2ban status
 
+* Run ```docker-compose logs -f sipwall | grep "ALLOWED"``` to view countries being analysed
+
 ## ENVs
 
 * **LOG_LEVEL** - one of CRITICAL, ERROR, WARNING, NOTICE, INFO, DEBUG. defaults to INFO
