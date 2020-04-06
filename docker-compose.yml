@@ -13,9 +13,9 @@ services:
       - BAN_DENIED_TRIALS=false
       - BAN_BY_COUNTRY=true
       - ALLOWED_COUNTRIES=BR
-      - BAN_TIME_SECONDS=600
+      - BAN_TIME_SECONDS=20
       - FAIL_TIME_WINDOW_SECONDS=300
-      - FAIL_COUNT_IN_WINDOW=5
+      - FAIL_COUNT_IN_WINDOW=10
 
   freepbx:
     image: flaviostutz/freepbx
