@@ -29,7 +29,10 @@ fi
 
 
 #Configure whitelist according to aparent public IP and whitelist
-export PUBLIC_IP=$(curl -s ifconfig.me)
+export PUBLIC_IP=""
+if [ "$WHITELISTED_PUBLIC_IP" == "true" ]; then
+  export PUBLIC_IP=$(curl -s ifconfig.me)
+fi
 envsubst < /sipwall-whitelist.conf.tmpl > /etc/fail2ban/jail.d/sipwall-whitelist.conf
 
 
