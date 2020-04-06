@@ -3,6 +3,8 @@
 IP=$1
 IPSETNAME=$2
 
+echo "CHECKING IF IP $IP WILL BE BANNED"
+
 /authorized-country.sh $IP
 AUTHORIZED=$?
 
