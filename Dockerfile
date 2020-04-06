@@ -8,6 +8,7 @@ RUN mkfifo /var/log/fail2ban.log
 RUN rm -rf /etc/fail2ban/filter.d/* && \
     rm -rf /etc/fail2ban/action.d/*
 
+ADD sipwall-whitelist.conf.tmpl /
 ADD sipwall-denied.conf.tmpl /
 ADD sipwall-denied-filter.conf /etc/fail2ban/filter.d/
 ADD sipwall-ipset-action.conf /etc/fail2ban/action.d/
