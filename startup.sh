@@ -33,9 +33,9 @@ export PUBLIC_IP=""
 if [ "$WHITELISTED_PUBLIC_IP" == "true" ]; then
   export PUBLIC_IP=$(curl -s ifconfig.me)
 fi
-export PRIVATE_IP=""
+export PRIVATE_IPS=""
 if [ "$WHITELISTED_PRIVATE_IP" == "true" ]; then
-  export PRIVATE_IP="10.0.0.0/8 172.16.0.0/12 192.168.0.0/16"
+  export PRIVATE_IPS="10.0.0.0/8 172.16.0.0/12 192.168.0.0/16"
 fi
 echo "Adding whitelisted IPs. PUBLIC_IP=$PUBLIC_IP; PRIVATE_IP=$PRIVATE_IP; WHITELISTED_IPS=$WHITELISTED_IPS"
 envsubst < /sipwall-whitelist.conf.tmpl > /etc/fail2ban/jail.d/sipwall-whitelist.conf
