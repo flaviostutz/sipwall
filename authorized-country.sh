@@ -2,9 +2,9 @@
 
 IP=$1
 
-COUNTRIES=$(whois $IP | grep ountry | perl -n -e'/ountry:.*(..)/ && print $1')
+COUNTRIES=$(whois $IP | grep ountry | perl -n -e'/ountry:.*(..)/ && print "$1 "')
 if [ "$COUNTRIES" == "" ]; then
-  COUNTRIES=$(whois -a $IP | grep ountry | perl -n -e'/ountry:.*(..)/ && print $1')
+  COUNTRIES=$(whois -a $IP | grep ountry | perl -n -e'/ountry:.*(..)/ && print "$1 "')
 fi
 # COUNTRY=$(whois -a $1 | grep -m1 ountry | perl -n -e'/ountry:.*(..)/ && print $1')
 # COUNTRY=$(curl -s http://ipinfo.io/$1 | perl -n -e'/ountry":.*"(..)"/ && print $1')
