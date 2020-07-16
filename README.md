@@ -1,4 +1,7 @@
 # sipwall
+
+[<img src="https://img.shields.io/docker/automated/flaviostutz/sipwall"/>](https://hub.docker.com/r/flaviostutz/sipwall)
+
 Analyses SIP network traffic and blocks hosts that are suspicious using ipset and iptables.
 
 Uses tcpdump for searching for hosts that are trying things that are being denied by SIP gateway and if they retry a lot, place the requesting IP to a blacklist using fail2ban+iptables for a period of time. This is useful to block brute force attacks.
